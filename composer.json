@@ -1,0 +1,9 @@
+{
+    "name": "mkietlinski/emails-filter",
+    "require": {
+        "symfony/console": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    }
+}

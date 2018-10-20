@@ -2,12 +2,12 @@
 
 namespace App\Tests\Service\FilterFile;
 
-use App\Service\FilterFile\FilterCSV;
+use App\Service\FilterFile\FilterCsv;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use PHPUnit\Framework\TestCase;
 
-class FilterCSVTest extends TestCase
+class FilterCsvTest extends TestCase
 {
     public function tearDown()
     {
@@ -22,7 +22,7 @@ class FilterCSVTest extends TestCase
     {
         $this->createCsvFileWithEmailAddress($address);
 
-        $filter = new FilterCSV('addresses');
+        $filter = new FilterCsv('addresses');
 
         self::assertContains($address, $filter->getValidAddresses());
     }
@@ -42,7 +42,7 @@ class FilterCSVTest extends TestCase
     {
         $this->createCsvFileWithEmailAddress($address);
 
-        $filter = new FilterCSV('addresses');
+        $filter = new FilterCsv('addresses');
 
         self::assertContains($address, $filter->getInvalidAddresses());
     }
@@ -55,6 +55,7 @@ class FilterCSVTest extends TestCase
             ['email1.@email.com'],
             ['email1@.email.com'],
             ['ema il1@email.com'],
+            ['ęmail@email.com'],
         ];
     }
 
@@ -62,7 +63,7 @@ class FilterCSVTest extends TestCase
     {
         self::expectExceptionMessage('File "invalidFilename.csv" does not exist.');
 
-        new FilterCSV('invalidFilename');
+        new FilterCsv('invalidFilename');
     }
 
     private function createCsvFileWithEmailAddress(string $address)

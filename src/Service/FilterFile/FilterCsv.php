@@ -4,7 +4,7 @@ namespace App\Service\FilterFile;
 
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 
-class FilterCSV implements FilterFileInterface
+class FilterCsv implements FilterFileInterface
 {
     const FILE_EXTENSION = '.csv';
 

@@ -3,7 +3,8 @@
 namespace App\Command;
 
 use App\Service\FilterEmailsService;
-use App\Service\FilterFile\FilterCSV;
+use App\Service\FilterFile\FilterCsv;
+use App\Service\GenerateFile\GenerateCsv;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,7 +27,10 @@ class FilterCsvEmailsCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $filterService = new FilterEmailsService(new FilterCSV($input->getArgument('filename')));
+            $filterService = new FilterEmailsService(
+                new FilterCsv($input->getArgument('filename')),
+                new GenerateCsv()
+            );
             $filterService->filter();
 
             $io->success('Addresses filtered');
